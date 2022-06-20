@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- 配置数据库信息，以外部文件提交 -->
+	<properties resource="db.properties"/>
+	
+	
+	<settings>
+		<!-- 开启日志，并指定使用的具体日志 -->
+	 	<setting name="logImpl" value="LOG4J"/>
+	</settings>
+	
+	
+	<!-- 别名 -->
+	 <typeAliases>
+	 	<package name="org.blog.entity"/>
+	 </typeAliases>
+	 
+	 
+	
+	<!-- 默认开发环境 -->
+	<environments default="development">
+		<!-- 开发环境 -->
+		<environment id="development">
+		
+		
+			<!-- 事务提交方式：
+				JDBC:利用JDBC方式处理事务（commit rollback close）
+				MANAGED:将事务交由其他组件去托管（spring jobss）,默认会关闭
+			 -->
+			
+			<!-- <transactionManager type="JDBC"/>
+				<property name="closeConnection" value="false"/> -->
+				
+			<transactionManager type="JDBC"/>	
+			<!-- 
+				数据源类型：
+					UNPOOLED:传统的JDBC模式（每次访问数据库，均需要打开、关闭等数据库）
+					POOLED:使用数据库连接池
+					JNDI:从tomcat中获取一个内置的数据库连接池（数据库连接池-数据源）
+			 -->
+			<dataSource type="POOLED">
+			<!-- 配置数据库信息 -->
+				<property name="driver" value="${driver}"/>
+				<property name="url" value="${url}"/>
+				<property name="username" value="${username}"/>
+				<property name="password" value="${password}"/>
+			</dataSource>
+		</environment>
+		
+		<environment id="shishi">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+			
+				<property name="driver" value="oracle.jdbc.OracleDriver"/>
+				<property name="url" value="jdbc:oracle:thin:@192.168.1.100:1521:ORCL"/>
+				<property name="username" value="scott"/>
+				<property name="password" value="tiger"/>
+			</dataSource>
+		</environment>
+		
+		<environment id="test">
+			<transactionManager type="JDBC"/>
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.OracleDriver"/>
+				<property name="url" value="jdbc:oracle:thin:@192.168.1.100:1521:ORCL"/>
+				<property name="username" value="scott"/>
+				<property name="password" value="tiger"/>
+			</dataSource>
+		</environment>
+		
+	</environments>
+	
+	<mappers>
+		<mapper resource="sqlmap/UserInfoMapper.xml"/>
+		<mapper resource="sqlmap/BlogMapper.xml"/>
+		<mapper resource="sqlmap/PictureMapper.xml"/>
+		<mapper resource="sqlmap/FriendMapper.xml"/>
+		<mapper resource="sqlmap/RemarkMapper.xml"/>
+		<mapper resource="sqlmap/FeedBackMapper.xml"/>
+	</mappers>
+	
+	
+</configuration>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace :该mapper.xml的 唯一标识-->
+<mapper namespace="org.blog.mapper.UserInfoMapper">
+	<!-- 后续通过 namespace.id -->
+	<!-- parameterType:输入参数的类型
+	resultType:查询返回值的类型，返回类型 -->
+	 
+	 <!-- UserInfo -->
+	 
+	<select id="queryUserIsExistById" parameterType="int" resultType="INTEGER">
+		select count(1) from userinfo where userid = #{userid}
+	</select>	
+	
+	<select id="queryUserById" parameterType="int" resultType="userinfo">
+		select * from userinfo where userid = #{userid}
+	</select>	
+	
+	<select id="queryUserIsExistByUser" parameterType="hashMap" resultType="INTEGER">
+		select count(1) from userinfo where username = #{username} and password = #{password}
+	</select>	
+	
+	<select id="queryUserIsExistByUsername" parameterType="string" resultType="INTEGER">
+		select count(1) from userinfo where username = #{username}
+	</select>
+	
+	<select id="queryUserInfoByUsername" parameterType="String" resultType="userInfo">
+		select * from userinfo where username = #{username}
+	</select>
+	
+	<select id="queryAllUserInfos" resultType="userinfo">
+		select * from userinfo
+	</select>
+	
+	<select id="queryAllUserInfosByNickname" resultType="userinfo">
+		select * from userinfo where nickname = #{nickname}
+	</select>
+	
+
+	
+	<insert id="addUserInfo" parameterType="hashMap">
+		insert into userinfo(userid, username, password, sex, nickname, motto) values(#{userid}, #{username}, #{password}, #{sex}, #{nickname}, #{motto} )
+	</insert>
+	
+	
+	
+	<delete id="deleteUserByUserid" parameterType="int">
+		delete from userinfo where userid = #{userid}
+	</delete>
+	
+	
+	
+	<update id="updateSexByUserid" parameterType="hashMap">
+		update userinfo set sex = #{sex} where userid = #{userid}
+	</update>
+	
+	<update id="updatePwdByUserid" parameterType="hashMap">
+		update userinfo set password = #{password} where userid = #{userid}
+	</update>
+	
+	<update id="updateNicknameByUserid" parameterType="hashMap">
+		update userinfo set nickname = #{nickname} where userid = #{userid}
+	</update>
+	
+	<update id="updateMottoByUserid" parameterType="hashMap">
+		update userinfo set motto = #{motto} where userid = #{userid}
+	</update>
+
+</mapper>	
+	
+	
+	
+	
+	
+	
+	
+	

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace :该mapper.xml的 唯一标识-->
+<mapper namespace="org.blog.mapper.PictureMapper">
+	
+	<select id="queryPictureIsExistByPictureid" parameterType="int" resultType="INTEGER">
+		select count(1) from picture where pictureid = #{pictureid}
+	</select>
+	
+	<select id="queryPictureByUserid" parameterType="int" resultType="picture">
+		select * from picture where userid = #{userid}
+	</select>
+	
+	<select id="queryPictureIsExistByPicturename" parameterType="string" resultType="INTEGER">
+		select count(1) from picture where picturename = #{picturename}
+	</select>
+	
+	<insert id="addPictureWithUserid" parameterType="hashMap">
+		insert into picture(pictureid, picturename, pictureroute, userid) values(#{pictureid}, #{picturename}, #{pictureroute}, #{userid})
+	</insert>
+	
+	<delete id="deletePictureByPircturenameWithUserid">
+		delete from picture where picturename = #{picturename} and userid = #{userid}
+	</delete>
+	
+</mapper>	
+	
+	
+	
+	
+	
+	
+	
+	

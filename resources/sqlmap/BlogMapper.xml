@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace :该mapper.xml的 唯一标识-->
+<mapper namespace="org.blog.mapper.BlogMapper">
+	<!-- 后续通过 namespace.id -->
+	<!-- parameterType:输入参数的类型
+	resultType:查询返回值的类型，返回类型 -->
+	 
+	<!-- Blog -->
+	
+	<select id="queryBlogIsExistById" parameterType="int" resultType="INTEGER">
+		select count(1) from blog where blogid = #{blogid}
+	</select>
+	
+	<select id="queryBlogById" parameterType="int" resultType="blog">
+		select * from blog where blogid = #{blogid}
+	</select>
+	
+	<select id="queryBlogByUserid" parameterType="int" resultType="blog">
+		select * from blog where userid = #{userid}
+	</select>
+	
+	<insert id="addBlogWithoutUpdatedate" parameterType="hashMap">
+		insert into blog(blogid, userid, headline, content, createdate, likes) values(#{blogid}, #{userid}, #{headline}, #{content}, #{createdate}, #{likes})
+	</insert>
+	
+	<insert id="addBlogWithoutCreatedate" parameterType="hashMap">
+		insert into blog(blogid, userid, headline, content, updatedate) values(#{blogid}, #{userid}, #{headline}, #{content}, #{updatedate})
+	</insert>
+	
+	<update id="updateBlogByBlogidWithoutcontent" parameterType="hashMap">
+		update blog set headline = #{headline} where blogid = #{blogid}
+	</update>
+	
+	<update id="updateBlogByBlogidWithoutHeadline" parameterType="hashMap">
+		update blog set content = #{content} where blogid = #{blogid}
+	</update>
+	
+	<update id="updateBlogByBlogidWithUpdatedate" parameterType="hashMap">
+		update blog set updatedate = #{updatedate} where blogid = #{blogid}
+	</update>
+	
+	<update id="updateBlogByBlogidForLikes" parameterType="int">
+		update blog set likes = likes + 1 where blogid = #{blogid}
+	</update>
+	
+	<update id="updateBlogByBlogidForDislikes" parameterType="int">
+		update blog set likes = likes - 1 where blogid = #{blogid}
+	</update>
+	
+	<delete id="deleteBlogByBlogid" parameterType="int">
+		delete from blog where blogid = #{blogid}
+	</delete>
+	
+
+</mapper>	
+	
+	
+	
+	
+	
+	
+	
+	

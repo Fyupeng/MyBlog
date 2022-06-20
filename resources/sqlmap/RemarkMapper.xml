@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace :该mapper.xml的 唯一标识-->
+<mapper namespace="org.blog.mapper.RemarkMapper">
+
+	<resultMap type="org.blog.entity.Remark" id="baseResultMap">
+		<id column="commentid" property="commentid" jdbcType="INTEGER" />
+		<result column="blogid" property="blogid" jdbcType="INTEGER"/>
+		<result column="userid" property="userid" jdbcType="INTEGER"/>
+		<result column="name" property="name" jdbcType="VARCHAR"/>
+		<result column="message" property="message" jdbcType="VARCHAR"/>
+		<result column="remarkdate" property="remarkdate" jdbcType="TIMESTAMP"/>
+	</resultMap>
+	
+	<select id="queryRemarkIsExistById" parameterType="int" resultType="INTEGER">
+		select count(1) from remark where commentid = #{commentid}
+	</select>
+	
+	<select id="queryAllRemarksByBlogid" parameterType="int" resultMap="baseResultMap">
+		select * from remark where blogid = #{blogid}
+	</select>
+	
+	
+	<select id="queryAllRemarksByUsername" parameterType="string" resultMap="baseResultMap">
+		select * from remark where name = #{name}
+	</select>
+	
+	<select id="queryAllRemarks" resultMap="baseResultMap">
+		select * from remark
+	</select>
+	
+	<insert id="addRemarkByBlogid" parameterType="hashMap">
+		insert into remark(commentid, userid, blogid, name, message, remarkdate) values(#{commentid}, #{userid}, #{blogid}, #{name}, #{message},#{remarkdate})
+	</insert>
+	
+	<delete id="deleteRemarkByIdServlet" parameterType="int">
+		delete from remark where commentid = #{commentid}
+	</delete>
+	
+</mapper>

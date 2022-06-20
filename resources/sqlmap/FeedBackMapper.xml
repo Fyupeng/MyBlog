@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace :该mapper.xml的 唯一标识-->
+<mapper namespace="org.blog.mapper.FeedBackMapper">
+	<!-- 后续通过 namespace.id -->
+	<!-- parameterType:输入参数的类型
+	resultType:查询返回值的类型，返回类型 -->
+	 
+	 <select id="queryFaceBack">
+	 	select * from feedback
+	 </select>
+	 
+	 <select id="queryFeedBackIsExistById" parameterType="int" resultType="INTEGER">
+	 	select count(1) from feedback where messageid = #{messageid}
+	 </select>
+	 
+	<select id="queryFeedBackById">
+		select * from feedback where messageid = #{messageid}
+	</select>
+	
+	<insert id="addFeedBack" parameterType="hashMap">
+		insert into feedback(messageid, message) values(#{messageid}, #{message})
+	</insert>
+	
+	<delete id="deleteFeedBackById">
+		delete from feedback where messageid = #{messageid}
+	</delete>
+	
+
+</mapper>	
+	
+	
+	
+	
+	
+	
+	
+	

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace :该mapper.xml的 唯一标识-->
+<mapper namespace="org.blog.mapper.FriendMapper">
+	<!-- 后续通过 namespace.id -->
+	<!-- parameterType:输入参数的类型
+	resultType:查询返回值的类型，返回类型 -->
+	 
+	 <!-- UserInfo -->
+	 
+	 <select id="queryFriendIsExistById" parameterType="int" resultType="INTEGER">
+	 	select count(1) from friend where friendid = #{friendid}
+	 </select>
+	 
+	<select id="queryAllFriendsByUserid" parameterType="int" resultType="friend">
+		select * from friend where userid = #{userid}
+	</select>
+	
+	<select id="queryAllFriendsByFriendusernamewithUserid" parameterType="hashMap" resultType="friend">
+		select * from friend where friendusername = #{friendusername} and userid = #{userid}
+	</select>
+	
+	<select id="queryAllFriendsByFriendnicknameWithUserid" parameterType="hashMap" resultType="friend">
+		select * from friend where friendnickname = #{friendnickname} and userid = #{userid}
+	</select>
+	
+	<insert id="addFriendByUserid" parameterType="hashMap">
+		insert into friend(friendid, frienduserid, friendusername, friendsex, friendnickname, friendmotto, userid) values(#{friendid}, #{frienduserid}, #{friendusername}, #{friendsex}, #{friendnickname}, #{friendmotto}, #{userid})
+	</insert>
+	
+	
+	<delete id="deleteFriendByFriendid" parameterType="int">
+		delete from friend where friendid = #{friendid}
+	</delete>
+
+</mapper>	
+	
+	
+	
+	
+	
+	
+	
+	
