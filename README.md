@@ -1,4 +1,7 @@
 ## 原生 JS + Servlet 博客管理项目
+
+![MyBlog（博客管理系统）](https://yupeng-tuchuang.oss-cn-shenzhen.aliyuncs.com/MyBlog%EF%BC%88%E5%8D%9A%E5%AE%A2%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%EF%BC%89.png)
+
 ### 一、路径配置
 #### 1.上传图片是在本地保存，
 
